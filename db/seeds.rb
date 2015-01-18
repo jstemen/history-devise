@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+App.create(title: 'facebook', url: 'https://fbstatic-a.akamaihd.net/rsrc.php/v2/yJ/r/XZU5QNqW7-3.js')
+
