@@ -6,6 +6,7 @@
  * SCANNED URLS *
  ****************/
 
+// [{name:slickdeals, urls:[http://slickdeals.com]}]
 var targets;
 
 $.get( "apps/", function( data ) {
@@ -90,7 +91,7 @@ function waitForFrameReady() {
     } else {
 
         frames['f'].stop();
-        setTimeout(navigate_to_target, 1);
+        setTimeout(navigateToTarget, 1);
 
     }
 
@@ -100,7 +101,7 @@ function waitForFrameReady() {
 
 /* Navigate the frame to the target URL. */
 
-function navigate_to_target() {
+function navigateToTarget() {
 
     cycles = 0;
 
@@ -157,6 +158,15 @@ function log_text(str, type, cssclass) {
 
 }
 
+function track(siteName, cycleCount, attemptCount, wasVisited){
+    var cssClass = 'not_visited'
+    if(wasVisited){
+        cssClass = 'visited'
+    }
+
+    log_text(cssClass + ': ' + siteName + ' [' + cycleCount + ':' + attemptCount + ']', 'li', cssClass);
+}
+
 
 /* Decides what to do next. May schedule another attempt for the same target,
  select a new target, or wrap up the scan. */
@@ -180,14 +190,14 @@ function maybeTestNext() {
 
         if (confirmed_visited) {
 
-            log_text('Visited: ' + current_name + ' [' + cycles + ':' + attempt + ']', 'li', 'visited');
+            track(current_name, cycles,attempt, true)
 
         }
 
         if (confirmed_visited || attempt == MAX_ATTEMPTS * targets[target_off].urls.length) {
 
             if (!confirmed_visited)
-                log_text('Not visited: ' + current_name + ' [' + cycles + '+]', 'li', 'not_visited');
+                track(current_name, cycles,attempt, false)
 
             confirmed_visited = false;
             target_off++;
