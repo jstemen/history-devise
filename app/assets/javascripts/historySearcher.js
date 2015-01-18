@@ -1,13 +1,12 @@
-/**
- * Created by jared on 1/17/15.
- */
-
 /****************
  * SCANNED URLS *
  ****************/
 
 // [{name:slickdeals, urls:[http://slickdeals.com]}]
 var targets;
+
+// [{name: slickdeals, visited: true}]
+var results =[]
 
 $.get( "apps/", function( data ) {
     targets = data;
@@ -36,7 +35,7 @@ var wait_cycles;
 
 var frame_ready = false;
 
-var start, stop, urls;
+var urls;
 
 /* The frame points to about:blank. Initialize a new test, giving the
  about:blank frame some time to fully load. */
@@ -163,7 +162,7 @@ function track(siteName, cycleCount, attemptCount, wasVisited){
     if(wasVisited){
         cssClass = 'visited'
     }
-
+    results.push({name:siteName, visited: wasVisited})
     log_text(cssClass + ': ' + siteName + ' [' + cycleCount + ':' + attemptCount + ']', 'li', cssClass);
 }
 
@@ -171,6 +170,9 @@ function track(siteName, cycleCount, attemptCount, wasVisited){
 /* Decides what to do next. May schedule another attempt for the same target,
  select a new target, or wrap up the scan. */
 
+function sendResults() {
+
+}
 function maybeTestNext() {
 
     frame_ready = false;
@@ -218,10 +220,7 @@ function maybeTestNext() {
 
     } else {
 
-        en = (new Date()).getTime();
-
-        document.getElementById('status').innerHTML = 'Tested ' + urls + ' individual URLs in ' + (en - st) + ' ms.';
-
+        sendResults()
         document.getElementById('btn').disabled = false;
 
     }
@@ -246,6 +245,7 @@ function start_stuff() {
     target_off = 0;
     attempt = 0;
     confirmed_visited = false;
+    results = [];
 
     document.getElementById('btn').disabled = true;
 
