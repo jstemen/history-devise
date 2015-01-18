@@ -40,18 +40,18 @@ var start, stop, urls;
 /* The frame points to about:blank. Initialize a new test, giving the
  about:blank frame some time to fully load. */
 
-function perform_check() {
+function performCheck() {
 
     wait_cycles = 0;
 
-    setTimeout(wait_for_read1, 1);
+    setTimeout(waitForAboutBlankToLoad, 1);
 
 }
 
 
 /* Confirm that about:blank is loaded correctly. */
 
-function wait_for_read1() {
+function waitForAboutBlankToLoad() {
 
     if (wait_cycles++ > 100) {
         alert('Something went wrong, sorry.');
@@ -65,18 +65,18 @@ function wait_for_read1() {
         frames['f'].stop();
         document.getElementById('f').src ='javascript:"<body onload=\'parent.frame_ready = true\'>"';
 
-        setTimeout(wait_for_read2, 1);
+        setTimeout(waitForFrameReady, 1);
 
     } catch (e) {
 
-        setTimeout(wait_for_read1, 1);
+        setTimeout(waitForAboutBlankToLoad, 1);
 
     }
 
 }
 
 
-function wait_for_read2() {
+function waitForFrameReady() {
 
     if (wait_cycles++ > 100) {
         alert('Something went wrong, sorry.');
@@ -85,7 +85,7 @@ function wait_for_read2() {
 
     if (!frame_ready) {
 
-        setTimeout(wait_for_read2, 1);
+        setTimeout(waitForFrameReady, 1);
 
     } else {
 
@@ -104,7 +104,7 @@ function navigate_to_target() {
 
     cycles = 0;
 
-    setTimeout(wait_for_noread, 1);
+    setTimeout(waitForNoread, 1);
 
     urls++;
     document.getElementById("f").src = current_url;
@@ -117,7 +117,7 @@ function navigate_to_target() {
  hit. If not, seems like cache miss. In both cases, abort pending
  navigation by pointing the frame back to about:blank when done. */
 
-function wait_for_noread() {
+function waitForNoread() {
 
     try {
 
@@ -126,17 +126,17 @@ function wait_for_noread() {
 
         if (cycles++ >= TIME_LIMIT) {
 
-            maybe_test_next();
+            maybeTestNext();
             return;
 
         }
 
-        setTimeout(wait_for_noread, 1);
+        setTimeout(waitForNoread, 1);
 
     } catch (e) {
 
         confirmed_visited = true;
-        maybe_test_next();
+        maybeTestNext();
 
     }
 
@@ -161,7 +161,7 @@ function log_text(str, type, cssclass) {
 /* Decides what to do next. May schedule another attempt for the same target,
  select a new target, or wrap up the scan. */
 
-function maybe_test_next() {
+function maybeTestNext() {
 
     frame_ready = false;
 
@@ -193,7 +193,7 @@ function maybe_test_next() {
             target_off++;
             attempt = 0;
 
-            maybe_test_next();
+            maybeTestNext();
 
         } else {
 
@@ -202,7 +202,7 @@ function maybe_test_next() {
 
             attempt++;
 
-            perform_check();
+            performCheck();
 
         }
 
@@ -245,7 +245,7 @@ function start_stuff() {
     st = (new Date()).getTime();
     urls = 0;
 
-    maybe_test_next();
+    maybeTestNext();
 
 }
 
