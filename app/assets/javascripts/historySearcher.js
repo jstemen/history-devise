@@ -6,75 +6,11 @@
  * SCANNED URLS *
  ****************/
 
-var targets = [
+var targets;
 
-    { 'category': 'Social networks' },
-
-    { 'name': 'Facebook', 'urls': [ 'https://s-static.ak.facebook.com/rsrc.php/v1/yX/r/HN0ehA1zox_.js',
-        'http://static.ak.facebook.com/rsrc.php/v1/yX/r/HN0ehA1zox_.js',
-        'https://fbstatic-a.akamaihd.net/rsrc.php/v2/yc/r/JW818-nnlon.js',
-        'http://static.ak.fbcdn.net/rsrc.php/v1/yX/r/HN0ehA1zox_.js' ] },
-
-    /*
-
-     { 'name': 'Twitter', 'urls': [ 'http://a0.twimg.com/a/1323193483/phoenix/css/phoenix_core.bundle.css',
-     'http://a2.twimg.com/a/1323193483/phoenix/css/phoenix_core.bundle.css',
-     'http://a0.twimg.com/a/1323193483/phoenix/css/phoenix_more.bundle.css',
-     'https://si0.twimg.com/a/1323193483/phoenix/css/phoenix_core.bundle.css',
-     'https://twimg0-a.akamaihd.net/a/1323193483/phoenix/css/phoenix_core.bundle.css' ] },
-
-     */
-
-    { 'name': 'Google Plus', 'urls': [ 'https://ssl.gstatic.com/gb/js/abc/gcm_57b1882492d4d0138a0a7ea7240394ca.js' ] },
-
-    { 'name': 'Dogster', 'urls': [ 'http://a1.cdnsters.com/static/resc/labjs1.2.0-jquery1.6-jqueryui1.8.12-bugfix4758.min.js.gz',
-        'http://a1.cdnsters.com/static/resc/labjs1.2.0-jquery1.6-jqueryui1.8.12-bugfix4758.min.js' ] },
-
-    { 'name': 'MySpace', 'urls': [ 'http://x.myspacecdn.com/modules/common/static/css/futuraglobal_kqj36l0b.css' ] },
-
-    { 'category': 'Content platforms' },
-
-    { 'name': 'Youtube', 'urls': [ 'http://s.ytimg.com/yt/cssbin/www-refresh-vflMpNCTQ.css' ] },
-
-    { 'name': 'Hulu', 'urls': [ 'http://static.huluim.com/system/hulu_0cd8f497_1.css' ] },
-
-    { 'name': 'Flickr', 'urls': [ 'http://l.yimg.com/g/css/c_fold_main.css.v109886.64777.105425.23' ] },
-
-    { 'name': 'JustinBieberMusic.com', 'urls': [ 'http://www.justinbiebermusic.com/underthemistletoe/js/fancybox.js' ] },
-
-    { 'name': 'Playboy', 'urls': [ 'http://www.playboy.com/wp-content/themes/pb_blog_r1-0-0/css/styles.css' /* 4h */ ] },
-
-    { 'category': 'Online media' },
-
-    { 'name': 'New York Times', 'urls': [ 'http://js.nyt.com/js2/build/sitewide/sitewide.js' ] },
-
-    { 'name': 'CNN', 'urls': [ 'http://z.cdn.turner.com/cnn/tmpl_asset/static/www_homepage/835/css/hplib-min.css',
-        'http://z.cdn.turner.com/cnn/tmpl_asset/static/intl_homepage/564/css/intlhplib-min.css' ] },
-
-    { 'name': 'Reddit', 'urls': [ 'http://www.redditstatic.com/reddit.en-us.xMviOWUyZqo.js' ] },
-
-    { 'name': 'Slashdot', 'urls': [ 'http://a.fsdn.com/sd/classic.css?release_20111207.02' ] },
-
-    { 'name': 'Fox News', 'urls': [ 'http://www.fncstatic.com/static/all/css/head.css?1' ] },
-
-    { 'name': 'AboveTopSecret.com', 'urls': [ 'http://www.abovetopsecret.com/forum/ats-scripts.js' ] },
-
-    { 'name': 'Wikileaks', 'urls': [ 'http://wikileaks.org/squelettes/jquery-1.6.4.min.js' ] },
-
-    { 'category': 'Commerce' },
-
-    { 'name': 'Diapers.com', 'urls': [ 'http://c1.diapers.com/App_Themes/Style/style.css?ReleaseVersion=5.2.12',
-        'http://c3.diapers.com/App_Themes/Style/style.css?ReleaseVersion=5.2.12' ] },
-
-    { 'name': 'Expedia', 'urls': [ 'http://www.expedia.com/static/default/default/scripts/expedia/core/e.js?v=release-2011-11-r4.9.317875' ] },
-
-    { 'name': 'Amazon (US)', 'urls': [ 'http://z-ecx.images-amazon.com/images/G/01/browser-scripts/us-site-wide-css-quirks/site-wide-3527593236.css._V162874846_.css' ] },
-
-    { 'name': 'Newegg', 'urls': [ 'http://images10.newegg.com/WebResource/Themes/2005/CSS/template.v1.w.5723.0.css' ] },
-
-    { 'name': 'eBay', 'urls': [ 'http://ir.ebaystatic.com/v4js/z/io/gbsozkl4ha54vasx4meo3qmtw.js' ] }
-
-];
+$.get( "apps/", function( data ) {
+    targets = data;
+}, "json" );
 
 
 /*************************
