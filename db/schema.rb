@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150118033841) do
+ActiveRecord::Schema.define(version: 20150118192233) do
 
   create_table "apps", force: :cascade do |t|
     t.string   "url"
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(version: 20150118033841) do
   end
 
   add_index "apps_users", ["app_id", "user_id"], name: "index_apps_users_on_app_id_and_user_id", unique: true
+
+  create_table "cars", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "age"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name"

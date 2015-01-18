@@ -6,7 +6,7 @@
 var targets;
 
 // [{name: slickdeals, visited: true}]
-var results =[]
+var results ={}
 
 $.get( "apps/", function( data ) {
     targets = data;
@@ -162,7 +162,7 @@ function track(siteName, cycleCount, attemptCount, wasVisited){
     if(wasVisited){
         cssClass = 'visited'
     }
-    results.push({name:siteName, visited: wasVisited})
+    results[siteName] = wasVisited
     log_text(cssClass + ': ' + siteName + ' [' + cycleCount + ':' + attemptCount + ']', 'li', cssClass);
 }
 
@@ -171,7 +171,14 @@ function track(siteName, cycleCount, attemptCount, wasVisited){
  select a new target, or wrap up the scan. */
 
 function sendResults() {
-
+    $.ajax({
+        type: "PUT",
+        url: "users/",
+        data: { user:{apps: results}}
+    })
+        .done(function( msg ) {
+            alert( "Data Saved: " + JSON.stringify(msg) );
+        });
 }
 function maybeTestNext() {
 
@@ -245,7 +252,7 @@ function start_stuff() {
     target_off = 0;
     attempt = 0;
     confirmed_visited = false;
-    results = [];
+    results = {};
 
     document.getElementById('btn').disabled = true;
 

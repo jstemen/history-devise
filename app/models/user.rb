@@ -5,4 +5,16 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_and_belongs_to_many :apps
+
+  def apps_by_name=(app_names)
+    apps = app_names.collect { |app_name, visited |
+    if visited == 'true'
+      app = App.find_by_title app_name
+      app
+    end
+    }
+    apps.compact!
+    self.apps = apps
+    self.save
+  end
 end
