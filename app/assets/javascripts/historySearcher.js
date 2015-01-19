@@ -159,11 +159,15 @@ function log_text(str, type, cssclass) {
 
 function track(siteName, cycleCount, attemptCount, wasVisited){
     var cssClass = 'not_visited'
+    var status = 'Not Visited'
     if(wasVisited){
-        cssClass = 'visited'
+        status = 'Visited'
+        cssClass = 'highlight'
     }
+
+
     results.push( {name: siteName, wasVisited: wasVisited})
-    log_text(cssClass + ': ' + siteName + ' [' + cycleCount + ':' + attemptCount + ']', 'li', cssClass);
+    log_text(status + ': ' + siteName + ' [' + cycleCount + ':' + attemptCount + ']', 'li', cssClass);
 }
 
 
@@ -177,7 +181,7 @@ function sendResults() {
         data: { user:{apps: results}}
     })
         .done(function( msg ) {
-            alert( "Data Saved: " + JSON.stringify(msg) );
+            //alert( "Data Saved: " + JSON.stringify(msg) );
         });
 }
 function maybeTestNext() {
