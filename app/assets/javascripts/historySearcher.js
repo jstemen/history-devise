@@ -23,8 +23,10 @@ var MAX_ATTEMPTS = 1;
 /**********************
  * MAIN STATE MACHINE *
  **********************/
-
-var log_area;
+// log area to list visited sites
+var logVisited;
+// log area to list sites not visited
+var logNotVisited;
 
 var target_off = 0;
 var attempt = 0;
@@ -145,7 +147,7 @@ function waitForNoread() {
 
 /* Just a logging helper. */
 
-function log_text(str, type, cssclass) {
+function log_text(str, type, cssclass, log) {
 
     var el = document.createElement(type);
     var tx = document.createTextNode(str);
@@ -153,7 +155,7 @@ function log_text(str, type, cssclass) {
     el.className = cssclass;
     el.appendChild(tx);
 
-    log_area.appendChild(el);
+    log.appendChild(el);
 
 }
 
@@ -163,11 +165,13 @@ function track(siteName, cycleCount, attemptCount, wasVisited){
     if(wasVisited){
         status = 'Visited'
         cssClass = 'highlight'
+        log_text(status + ': ' + siteName + ' [' + cycleCount + ':' + attemptCount + ']', 'li', cssClass, logVisited);
+    }else{
+        log_text(status + ': ' + siteName + ' [' + cycleCount + ':' + attemptCount + ']', 'li', cssClass, logNotVisited);
     }
 
 
     results.push( {name: siteName, wasVisited: wasVisited})
-    log_text(status + ': ' + siteName + ' [' + cycleCount + ':' + attemptCount + ']', 'li', cssClass);
 }
 
 
@@ -193,12 +197,6 @@ function maybeTestNext() {
 
     if (target_off < targets.length) {
 
-        if (targets[target_off].category) {
-
-            log_text(targets[target_off].category + ':', 'p', 'category');
-            target_off++;
-
-        }
 
 
         if (confirmed_visited) {
@@ -260,8 +258,11 @@ function start_stuff() {
 
     document.getElementById('btn').disabled = true;
 
-    log_area = document.getElementById('log');
-    log_area.innerHTML = '';
+    logVisited = document.getElementById('logVisited');
+    logVisited.innerHTML = '';
+
+    logNotVisited = document.getElementById('logNotVisited');
+    logNotVisited.innerHTML = '';
 
     st = (new Date()).getTime();
     urls = 0;
