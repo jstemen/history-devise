@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resources :cars
 
+  #user comes from session
   put 'users/' => 'users#update'
+
   get 'apps/' => 'apps#index'
 
   get 'static_pages/home'

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   def update
+    #Todo find a less complicated dto structure that still protects against mass assignment
     user = current_user
     hash = {}
     user_params['apps'].each{|array_param|
