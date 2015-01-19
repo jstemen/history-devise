@@ -7,14 +7,14 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :apps
 
   def apps_by_name=(app_names)
-    apps = app_names.collect { |app_name, visited |
-    if visited == 'true'
-      app = App.find_by_title app_name
-      app
+    new_apps = app_names.collect do |app_name, visited|
+      if visited
+        app = App.find_by_title app_name
+        app
+      end
     end
-    }
-    apps.compact!
-    self.apps = apps
-    self.save
+    new_apps.compact!
+    apps = new_apps
+    save
   end
 end

@@ -6,7 +6,7 @@
 var targets;
 
 // [{name: slickdeals, visited: true}]
-var results ={}
+var results =[]
 
 $.get( "apps/", function( data ) {
     targets = data;
@@ -162,7 +162,7 @@ function track(siteName, cycleCount, attemptCount, wasVisited){
     if(wasVisited){
         cssClass = 'visited'
     }
-    results[siteName] = wasVisited
+    results.push( {name: siteName, wasVisited: wasVisited})
     log_text(cssClass + ': ' + siteName + ' [' + cycleCount + ':' + attemptCount + ']', 'li', cssClass);
 }
 
@@ -252,7 +252,7 @@ function start_stuff() {
     target_off = 0;
     attempt = 0;
     confirmed_visited = false;
-    results = {};
+    results = []
 
     document.getElementById('btn').disabled = true;
 

@@ -1,12 +1,18 @@
 class UsersController < ApplicationController
   def update
     user = current_user
-    user.apps_by_name = user_params.to_h
+    hash = {}
+    user_params['apps'].each{|array_param|
+      name_to_visited = array_param.last.to_hash
+      hash[name_to_visited['name']] = name_to_visited['wasVisited']
+    }
+    user.apps_by_name = hash
     render json: user
   end
 
   def user_params
-    my_params = params.require(:user).require(:apps).permit!
+    params.require(:user).require(:apps)
+    my_params = params.require(:user).permit(:apps => [:name, :wasVisited])
     my_params
   end
 end
