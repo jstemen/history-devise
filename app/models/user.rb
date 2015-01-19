@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
       end
     end
     new_apps.compact!
-    apps = new_apps
+    self.apps = new_apps
     save
   end
 end
