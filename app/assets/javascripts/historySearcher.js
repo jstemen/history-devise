@@ -170,8 +170,9 @@ function track(siteName, cycleCount, attemptCount, wasVisited){
         log_text(status + ': ' + siteName + ' [' + cycleCount + ':' + attemptCount + ']', 'li', cssClass, logNotVisited);
     }
 
-
-    results.push( {name: siteName, wasVisited: wasVisited})
+    if(wasVisited){
+        results.push(siteName)
+    }
 }
 
 
