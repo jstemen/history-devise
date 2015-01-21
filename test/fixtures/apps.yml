@@ -1,7 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  url: MyString
+slickdeals:
+  title: slickdeals
+  url: http://slickdeals.com
 
-two:
-  url: MyString
+google:
+  title: google
+  url: http://google.com
+
+cnn:
+  title: cnn
+  url: http://cnn.com

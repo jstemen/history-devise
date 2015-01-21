@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20150118192233) do
     t.string   "title"
   end
 
-  add_index "apps", ["url"], name: "index_apps_on_url", unique: true
+  add_index "apps", ["url"], name: "index_apps_zon_url", unique: true
 
   create_table "apps_users", id: false, force: :cascade do |t|
     t.integer "user_id", null: false
