@@ -18,7 +18,7 @@ $.get( "apps/", function( data ) {
  *************************/
 
 var TIME_LIMIT = 3; /* used to be 2 */
-var MAX_ATTEMPTS = 1;
+var MAX_ATTEMPTS = 3;
 
 /**********************
  * MAIN STATE MACHINE *
@@ -231,7 +231,6 @@ function maybeTestNext() {
     } else {
 
         sendResults()
-        document.getElementById('btn').disabled = false;
 
     }
 
@@ -257,8 +256,6 @@ function start_stuff() {
     confirmed_visited = false;
     results = []
 
-    document.getElementById('btn').disabled = true;
-
     logVisited = document.getElementById('logVisited');
     logVisited.innerHTML = '';
 
@@ -272,3 +269,11 @@ function start_stuff() {
 
 }
 
+
+$(function(){
+    setTimeout(function(){
+        if($('logVisited')){
+            start_stuff()
+        }
+    }, 1000)
+})
